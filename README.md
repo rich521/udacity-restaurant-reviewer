@@ -5,12 +5,12 @@
 2. Open terminal, cd to '/project folder'
 2. Terminal run: npm install
 3. Terminal run: gulp serve:dist
-		- Runs app (google chrome will initialize) 
+	* Runs app (google chrome will initialize) 
 4. For developer mode instead, terminal run: gulp serve 
-		- Runs app (google chrome will initialize) 
-		- Should start the server for live editing
-		- Edit in src files only
-		- Edit main.scss, not main.css file
+	* Runs app (google chrome will initialize) 
+	* Should start the server for live editing
+	* Edit in src files only
+	* Edit main.scss, not main.css file
 
 ####Note
 
