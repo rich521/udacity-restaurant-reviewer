@@ -1,0 +1,232 @@
+$red: #c61919;
+$grey: #f4f4f4;
+$black-grey: #565656;
+html,
+body {
+    font-family: 'Quicksand', sans-serif;
+    height: 100%;
+    margin: auto 0;
+    text-align: center;
+    color: white;
+    background-color: $grey;
+    font-size: 16px;
+}
+
+h1 {
+    margin: 0;
+    padding-top: 20px;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+.header {
+    height: 300px;
+    background-image: url('../imgs/pizza-hero.jpg');
+    background-size: cover;
+    form {
+        padding: 50px;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        justify-content: center;
+        input,
+        label,
+        button {
+            margin: 5px;
+        }
+        label {
+            line-height: 2.3;
+        }
+    }
+}
+
+.main {
+    color: black;
+    padding-bottom: 50px;
+}
+
+.h2-main {
+    size: 6px;
+}
+
+.gif {
+    display: none;
+    position: absolute;
+    left: 50%;
+}
+
+.item-card {
+    margin: 10px auto;
+    width: 550px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: white;
+    th {
+        color: grey;
+        padding-right: 20px;
+    }
+    label {
+        display: block;
+    }
+    .review-label {
+        text-align: left;
+    }
+    textarea {
+        border-radius: 5px;
+        border-color: lightgrey;
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        resize: vertical;
+    }
+    select {
+        color: white;
+        background: transparent;
+        background-color: $red;
+        border: none;
+        font-size: 18px;
+        height: 29px;
+        padding: 5px;
+        width: 100px;
+    }
+}
+
+.row-1 {
+    padding-bottom: 10px;
+    border-bottom: 1px lightgrey solid;
+}
+
+.row-2 {
+    margin-top: 10px;
+    width: 100%;
+    text-align: left;
+    td {
+        padding: 3px 5px;
+    }
+}
+
+.res-img {
+    border-radius: 5px;
+}
+
+.rating {
+    padding-bottom: 5px;
+    span {
+        font-weight: bold;
+        font-size: 16px;
+        font-family: arial;
+    }
+}
+
+.review {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: #c61919;
+}
+
+.review:hover {
+    color: white;
+}
+
+.list-review div {
+    padding: 5px;
+}
+
+.comment {
+    padding: 5px;
+    background-color: $grey;
+    border-radius: 5px;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    position: absolute;
+}
+
+.footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding-top: 15px;
+    height: 50px;
+    background-color: $black-grey;
+    text-align: center;
+}
+
+
+/*individual items*/
+
+.btn-default {
+    color: white;
+    background-color: $red;
+    border-color: $red;
+}
+
+// .btn-default:hover,
+// .btn-default:focus {
+//     color: white;
+//     background-color: lightgrey;
+//     border-color: lightgrey;
+// }
+.location-input {
+    width: 200px;
+}
+
+.cuisine-input {
+    width: 300px;
+}
+
+.sortorder:after {
+    content: '\25b2'; // BLACK UP-POINTING TRIANGLE
+}
+
+.sortorder.reverse:after {
+    content: '\25bc'; // BLACK DOWN-POINTING TRIANGLE
+}
+
+@media screen and (max-width: 1000px) {
+    .header {
+        height: 350px;
+        form {
+            margin: auto;
+            padding: 10px;
+            flex-direction: column;
+            width: 100%;
+            input,
+            label,
+            button {
+                width: 100%;
+                margin-top: 5px 0;
+            }
+            label {
+                text-align: left;
+            }
+        }
+    }
+    .location-input {
+        width: 100%;
+    }
+    .cuisine-input {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .item-card {
+        width: 90%;
+    }
+}

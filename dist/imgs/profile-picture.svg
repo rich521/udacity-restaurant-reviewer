@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #bdc7d9;
+      }
+
+      .cls-2 {
+        fill: #6e8fd1;
+      }
+    </style>
+  </defs>
+  <rect width="100" height="100" rx="5" ry="5" class="cls-1"/>
+  <circle cx="50" cy="45" r="18" class="cls-2"/>
+  <ellipse cx="50" cy="100.5" rx="36" ry="39.5" class="cls-2"/>
+</svg>

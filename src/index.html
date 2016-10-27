@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="reviewApp" ng-init="subPage.url='list.html'">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Restaurant Reviewer">
+    <meta name="author" content="Richard Strutt">
+    <title>Restaurant Reviews</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+    <script src="js/socket.min.js"></script>
+    <script src="js/idb.min.js"></script>
+    <script src="js/scripts.js"></script>
+</head>
+
+<body ng-controller="MainCtrl">
+    <div class="wrapper">
+        <header class="header">
+            <h1>Quplar Reviews</h1>
+            <p>Search for your restaurant</p>
+            <form>
+                <label for="search_2">Location</label>
+                <input id="search_2" type="text" placeholder="San Francisco, CA" class="form-control location-input">
+                <label for="search_1">Cuisine</label>
+                <input name="search_1" id="search_1" type="text" placeholder="Sushi, Tacos, Italian" class="form-control cuisine-input" autocomplete="off">
+                <button type="button" class="btn btn-default btn-sm" id="search" ng-click="search()" type="submit">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                </button>
+            </form>
+        </header>
+        <main class="main">
+            <h2 ng-show="h2">Restaurant list</h2>
+            <p ng-show="h2">Search first to see restaurant list</p>
+            <div ng-show="gif" aria-label="Ajax loader gif">
+                <img ng-src="./imgs/ajax-loader.gif" alt="Loading page.." />
+            </div>
+            <div ng-include="subPage.url" ng-show="list"></div>
+        </main>
+        <script type="text/ng-template" id="list.html">
+            <h2>Searched Restaurant list</h2>
+            <button class="tn btn-default btn-sm" ng-click="sortBy('name')" ">Name
+                <span class="sortorder " ng-show="propertyName==='name' " ng-class="{reverse: reverse} "></span>
+                <span class="visuallyhidden ">{{ reverse==true ? "Sorted by A to Z " : "Sorted by Z to A "}}</span>
+            </button>
+            <button class="tn btn-default btn-sm " ng-click="sortBy( 'rating') ">Rating 
+                <span class="sortorder " ng-show="propertyName==='rating' " ng-class="{reverse: reverse} "></span>
+                <span class="visuallyhidden ">{{ reverse==true ? "Sorted by low to high rating " : "Sorted by high to low rating "}}</span>
+            </button>
+            <button class="tn btn-default btn-sm " ng-click="sortBy( 'review_count') ">Reviews 
+                <span class="sortorder " ng-show="propertyName==='review_count' " ng-class="{reverse: reverse} "></span>
+                <span class="visuallyhidden ">{{ reverse==true ? "Sorted by low to high reviews " : "Sorted by high to low reviews "}}</span>
+            </button>
+            <article class="item-card " id="article " ng-repeat="list in lists ">
+                <h3 class="res-title ">{{list.name}}</h3>
+                <div class="row-1 ">
+                    <img class="res-img " ng-src="{{list.image_url}} " alt="Image of {{list.name}} " />
+                    <div class="rating ">RATING: <span>{{list.rating}}</span></div>
+                    <a class="review " href="# " data="{{list.id}} " ng-click="action(list.id, list.name); " aria-label="Link to {{list.name}} review site with {{list.review_count}} reviews ">REVIEWS: {{list.review_count}}</a>
+                </div>
+                <table class="row-2 ">
+                    <CAPTION>Restaurant details</CAPTION>
+                    <tbody>
+                        <tr>
+                            <th>CATEGORY: </th>
+                            <td>{{list.categories[0][0]}}</td>
+                        </tr>
+                        <tr>
+                            <th>PHONE: </th>
+                            <td>{{list.display_phone}}</td>
+                        </tr>
+                        <tr>
+                            <th>HOURS: </th>
+                            <td>{{list.hourOpen}} - {{list.hourClose}}</td>
+                        </tr>
+                        <tr>
+                            <th>ADDRESS: </th>
+                            <td>{{list.location.display_address[0]}}, {{list.location.display_address[1]}}, {{list.location.display_address[2]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </script>
+        <script type="text/ng-template " id="listing.html ">
+            <h2>Reviews for '{{restaurant}}'</h2>
+            <button class="btn btn-default btn-sm " ng-click="subPage.url='list.html' " autofocus>Back to results</button>
+            <form class="item-card " ng-submit="addReview(restaurant) ">
+                <label for="review-rating ">Review rating</label>
+                <select name="review-rating " id="review-rating " ng-model="reviewed.rating " required>
+                    <option value=" ">Select</option>
+                    <option value="1 ">1 star</option>
+                    <option value="2 ">2 star</option>
+                    <option value="3 ">3 star</option>
+                    <option value="4 ">4 star</option>
+                    <option value="5 ">5 star</option>
+                </select>
+                <label class="review-label " for="review-name ">Enter your name</label>
+                <input name="review-name " id="review-name " type="text " placeholder="Your name " class="form-control " autocomplete="off " ng-model="reviewed.name " required>
+                <label class="review-label " for="review-text ">Your review</label>
+                <textarea id="review-text " placeholder="Write your review here.. (Max: 200) " maxlength="200 " ng-model="reviewed.comment " required></textarea>
+                <button class="btn btn-default btn-sm " id="submitReview " type="submit ">Submit Review</button>
+            </form>
+            <article class="item-card " ng-repeat="review in reviews | orderBy: '-rating' track by $index ">
+                <div class="list-review ">
+                    <div class="reviewer-name " aria-label="Reviewer 's name is {{review.name}}">{{review.name}}</div>
+                    <img class="res-img" ng-src="{{review.user_image}}" alt="Image of your default profile picture">
+                    <div class="res-rating">Reviewer's rating: <span>{{review.rating}}</span>
+    </div>
+    <div class="review-date" aria-label="Date of review is {{review.time}}">{{review.time}}</div>
+    <p class="comment">{{review.comment}}</p>
+    </div>
+    </article>
+    </script>
+    <footer class="footer">
+        <p>2016 Quplar Company Inc.</p>
+    </footer>
+    </div>
+</body>
+
+</html>
