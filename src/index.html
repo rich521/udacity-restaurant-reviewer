@@ -36,7 +36,7 @@
             <h2 ng-show="h2">Restaurant list</h2>
             <p ng-show="h2">Search first to see restaurant list</p>
             <div ng-show="gif" aria-label="Ajax loader gif">
-                <img ng-src="./imgs/ajax-loader.gif" alt="Loading page.." />
+                <img ng-src="./imgs/ajax-loader.gif" alt="Loading page.." class="gif" />
             </div>
             <div ng-include="subPage.url" ng-show="list"></div>
         </main>
@@ -54,7 +54,7 @@
                 <span class="sortorder " ng-show="propertyName==='review_count' " ng-class="{reverse: reverse} "></span>
                 <span class="visuallyhidden ">{{ reverse==true ? "Sorted by low to high reviews " : "Sorted by high to low reviews "}}</span>
             </button>
-            <article class="item-card " id="article " ng-repeat="list in lists ">
+            <article class="item-card "  ng-repeat="list in lists ">
                 <h3 class="res-title ">{{list.name}}</h3>
                 <div class="row-1 ">
                     <img class="res-img " ng-src="{{list.image_url}} " alt="Image of {{list.name}} " />
@@ -89,8 +89,8 @@
             <button class="btn btn-default btn-sm " ng-click="subPage.url='list.html' " autofocus>Back to results</button>
             <form class="item-card " ng-submit="addReview(restaurant) ">
                 <label for="review-rating ">Review rating</label>
-                <select name="review-rating " id="review-rating " ng-model="reviewed.rating " required>
-                    <option value=" ">Select</option>
+                <select name="review-rating" id="review-rating" class="form-control" ng-model="reviewed.rating" required="required">
+                    <option value="">Select</option>
                     <option value="1 ">1 star</option>
                     <option value="2 ">2 star</option>
                     <option value="3 ">3 star</option>
